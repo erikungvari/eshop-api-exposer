@@ -36,10 +36,20 @@ eshopApi:
 In RouterFactory \
 Add:
 ```
-$router->addRoute('api/eshop/<action>', 'EshopApi:Api:default');
+$router->addRoute('<locale cs|en|de|ru|sk|pl>/api/eshop/<action>', [
+    'presenter' => 'EshopApi:Api',
+    'action' => 'default',
+]);
+
+$router->addRoute('/api/eshop/<action>', [
+    'presenter' => 'EshopApi:Api',
+    'action' => 'default',
+    'locale' => 'cs', // your default language
+]);
 ```
 
 Endpoints
 ```
 /api/eshop/products
+<locale>/api/eshop/products
 ```

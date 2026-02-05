@@ -22,7 +22,12 @@ final class ApiPresenter extends Presenter
 
     public function actionProducts(): void
     {
-        $this->sendResponse(new JsonResponse($this->dataProvider->getProducts()));
+        $locale = $this->getParameter('locale'); // cs, en, de...
+
+        $data = $this->dataProvider->getProducts($locale);
+
+        $this->sendResponse(new JsonResponse($data));
     }
+
 
 }
