@@ -39,6 +39,20 @@ final class EshopDataProvider implements DataProvider
         return $this->normalize($products);
     }
 
+    public function getProductById(int $id, ?string $locale = null): ?array
+    {
+        $product = $this->db->table('product')->where('id', $id);
 
+        if ($locale) {
+            $langRow = $this->db->table('settings_lang')->where('name', $locale)->fetch();
+            if (!$langRow) {
+                return [];
+            }
+            $product->where('lang', (int) $langRow->id);
+        }
+
+        $row = $product->fetch();
+        return $row ? $this->normalize($row) : [];
+    }
 
 }
