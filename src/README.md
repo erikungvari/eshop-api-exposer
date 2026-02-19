@@ -53,12 +53,11 @@ eshopApi:
 In your `RouterFactory`, add:
 
 ```php
-$router->addRoute('<locale cs|en|de|ru|sk|pl>/api/eshop/<action>', [
+$router->addRoute('<locale cs|en|de|ru|sk|pl>/api/eshop/<action>[/<productId \d+>]', [
     'presenter' => 'EshopApi:Api',
     'action' => 'default',
 ]);
-
-$router->addRoute('/api/eshop/<action>', [
+$router->addRoute('/api/eshop/<action>[/<productId \d+>]', [
     'presenter' => 'EshopApi:Api',
     'action' => 'default',
     'locale' => 'cs', // your default language
@@ -74,12 +73,13 @@ Access your e-shop data via:
 ```
 GET /api/eshop/products
 GET /{locale}/api/eshop/products
+
+GET /api/eshop/products/<eshopId>
+GET /{locale}/api/eshop/products/<eshopId>
+
+GET /api/eshop/products/<eshopId>/<productId>
+GET /{locale}/api/eshop/products/<eshopId>/<productId>
 ```
 
 Supported locales: `cs`, `en`, `de`, `ru`, `sk`, `pl`
 
----
-
-## 📝 License
-
-MIT
